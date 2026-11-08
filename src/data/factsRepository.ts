@@ -116,7 +116,20 @@ const mergeFacts = (): FactCard[] => {
   return Array.from(map.values()).filter(hasValidImage);
 };
 
-export const ALL_FACTS: FactCard[] = mergeFacts();
+// Fisher-Yates algoritmus pre rovnomerné náhodné premiešanie
+export const shuffleArray = <T>(array: T[]): T[] => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = shuffled[i];
+    shuffled[i] = shuffled[j];
+    shuffled[j] = temp;
+  }
+  return shuffled;
+};
+
+// Striktný filter a náhodné premiešanie pri každom načítaní stránky
+export const ALL_FACTS: FactCard[] = shuffleArray(mergeFacts());
 
 export const getFactsByCategory = (categoryId: CategoryId): FactCard[] => {
   if (categoryId === 'all') return ALL_FACTS;
