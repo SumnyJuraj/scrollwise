@@ -55,7 +55,7 @@ export const FactCardItem: React.FC<FactCardItemProps> = ({
 
   return (
     <div
-      className="relative w-full h-full flex items-center justify-center p-3 sm:p-5 select-none"
+      className="relative w-full h-full flex flex-col items-center justify-center select-none"
       onDoubleClick={handleDoubleTap}
     >
       {/* MAIN CARD - Clean, refined, non-AI aesthetic */}
@@ -63,7 +63,7 @@ export const FactCardItem: React.FC<FactCardItemProps> = ({
         initial={{ opacity: 0.9, scale: 0.98 }}
         animate={{ opacity: 1, scale: isActive ? 1 : 0.97 }}
         transition={{ duration: 0.3, ease: 'easeOut' }}
-        className="relative w-full max-w-[430px] h-[91vh] max-h-[790px] rounded-3xl overflow-hidden flex flex-col justify-between shadow-2xl bg-[#14151a] border border-zinc-800/80 p-5 sm:p-6"
+        className="relative w-full max-w-[430px] h-full max-h-[720px] rounded-3xl overflow-hidden flex flex-col justify-between shadow-2xl bg-[#14151a] border border-zinc-800/80 p-4 sm:p-5"
       >
         {/* 1. TOP HEADER BAR */}
         <div className="relative z-10 flex items-center justify-between pb-3.5 border-b border-zinc-800/60 shrink-0">

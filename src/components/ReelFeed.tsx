@@ -105,7 +105,7 @@ export const ReelFeed: React.FC<ReelFeedProps> = ({
           return (
             <div
               key={fact.id}
-              className="w-full h-screen snap-start snap-always flex items-center justify-center"
+              className="w-full h-screen snap-start snap-always flex flex-col items-center justify-center pt-24 pb-6 px-3 sm:px-4"
             >
               {isNear && (
                 <FactCardItem

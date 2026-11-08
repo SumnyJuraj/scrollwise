@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Heart, Bookmark, ExternalLink, Volume2, VolumeX, Share2, Check } from 'lucide-react';
+import { Heart, Bookmark, ExternalLink, Share2, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
 import type { FactCard } from '../types/fact';
 import { playLikeSound, playSaveSound } from '../utils/sound';
-import { speakFact, stopSpeech } from '../utils/speech';
 
 interface ActionBarProps {
   fact: FactCard;
@@ -22,7 +21,6 @@ export const ActionBar: React.FC<ActionBarProps> = ({
   onToggleSave,
   onOpenWikiModal,
 }) => {
-  const [isSpeaking, setIsSpeaking] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const handleLike = (e: React.MouseEvent) => {
@@ -35,21 +33,6 @@ export const ActionBar: React.FC<ActionBarProps> = ({
     e.stopPropagation();
     playSaveSound();
     onToggleSave(fact.id);
-  };
-
-  const handleSpeech = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (isSpeaking) {
-      stopSpeech();
-      setIsSpeaking(false);
-    } else {
-      const speechText = `${fact.hookTitle}. ${fact.snippet}`;
-      speakFact(
-        speechText,
-        () => setIsSpeaking(true),
-        () => setIsSpeaking(false)
-      );
-    }
   };
 
   const handleShare = async (e: React.MouseEvent) => {
@@ -144,27 +127,7 @@ export const ActionBar: React.FC<ActionBarProps> = ({
         <span className="text-[10px] font-medium text-zinc-400 mt-1">Wiki</span>
       </div>
 
-      {/* 4. TEXT-TO-SPEECH READOUT */}
-      <div className="flex flex-col items-center">
-        <motion.button
-          whileTap={{ scale: 0.8 }}
-          whileHover={{ scale: 1.08 }}
-          onClick={handleSpeech}
-          className={`p-2.5 rounded-full transition-all border ${
-            isSpeaking
-              ? 'bg-sky-500/20 text-sky-400 border-sky-500/40 animate-pulse'
-              : 'bg-zinc-800/80 text-zinc-300 hover:text-white hover:bg-zinc-700/80 border-zinc-700/60'
-          }`}
-          title={isSpeaking ? 'Stop voice readout' : 'Read aloud (15s)'}
-        >
-          {isSpeaking ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
-        </motion.button>
-        <span className="text-[10px] font-medium text-zinc-400 mt-1">
-          {isSpeaking ? 'Audio...' : 'Voice'}
-        </span>
-      </div>
-
-      {/* 5. SHARE BUTTON */}
+      {/* 4. SHARE BUTTON */}
       <div className="flex flex-col items-center">
         <motion.button
           whileTap={{ scale: 0.8 }}

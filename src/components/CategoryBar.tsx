@@ -30,7 +30,7 @@ export const CategoryBar: React.FC<CategoryBarProps> = ({
   }, [activeCategory]);
 
   return (
-    <div className="fixed top-14 left-0 right-0 z-30 flex justify-center px-3 sm:px-4 py-2 pointer-events-none">
+    <div className="fixed top-12 left-0 right-0 z-30 flex justify-center px-2 sm:px-4 py-1.5 pointer-events-none bg-gradient-to-b from-[#090a0f]/95 via-[#090a0f]/80 to-transparent">
       <div
         ref={scrollContainerRef}
         className="flex items-center gap-1.5 overflow-x-auto no-scrollbar max-w-full px-2 py-1 pointer-events-auto"
